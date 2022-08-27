@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { CartContext, MobileContext } from '../Context/MyContext'
+
 import Divider from './divider';
 import ListItem from './ListItem';
 import Button from './Button';
 
-const Cart = ({ myCart, setCart, isNarrowScreen }) => {
+const Cart = () => {
+
+    const { cart: myCart, setCart } = useContext(CartContext);
+    const { isNarrowScreen } = useContext(MobileContext);
+
     const [showCart, toggleCart] = useState(false);
     return (
         <div

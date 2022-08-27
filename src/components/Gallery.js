@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-const Gallery = ({ images, isNarrowScreen, setShowModal, modalMode }) => {
+import { ModalContext, MobileContext } from '../Context/MyContext'
+
+const Gallery = ({ images, modalMode }) => {
+
+    const { setShowModal } = useContext(ModalContext);
+    const { isNarrowScreen } = useContext(MobileContext);
+
+
     let [currentImage, setCurrentImage] = useState(images[0]);
     let carousel = images.map((link) => {
         return Image(link, setCurrentImage, currentImage === link);

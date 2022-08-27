@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { CartContext } from '../Context/MyContext'
+
 import Button from './Button';
 
-const AddToCart = ({ cart, setCart, isNarrowScreen }) => {
+const AddToCart = ({ isNarrowScreen }) => {
+
+    const { setCart } = useContext(CartContext);
+
     const buttonStyle = {
         border: 'none',
         backgroundColor: 'transparent',

@@ -1,9 +1,12 @@
 import './App.css';
 import Container from './components/Container';
+import { useState, useEffect } from 'react';
+
+import { CartContext, MobileContext, ModalContext } from './Context/MyContext';
+
 import Details from './components/Details';
 import Gallery from './components/Gallery';
 import Header from './components/Header';
-import { useState, useEffect } from 'react'
 import Modal from './components/Modal';
 
 function App() {
@@ -33,17 +36,27 @@ function App() {
     '/images/image-product-3.jpg',
     '/images/image-product-4.jpg',
   ];
+
   const [cart, setCart] = useState(undefined);
+
   return (
-    <div className='App'>
-      <Header myCart={cart} setCart={setCart} isNarrowScreen={isNarrowScreen}></Header>
-      <Modal setShowModal={setShowModal} showModal={showModal} images={images} isNarrowScreen={isNarrowScreen} ></Modal>
-      <Container isNarrowScreen={isNarrowScreen}>
-        <Gallery images={images} isNarrowScreen={isNarrowScreen} setShowModal={setShowModal}></Gallery>
-        <Details cart={cart} setCart={setCart} isNarrowScreen={isNarrowScreen}></Details>
-      </Container>
-      {/* <Button block >Heyyy</Button> */}
-    </div>
+    <CartContext.Provider value={{ cart, setCart }}>
+
+      <MobileContext.Provider value={{ isNarrowScreen, setIsNarrowScreen }}>
+
+        <div className='App'>
+          <Header />
+          <ModalContext.Provider value={{ showModal, setShowModal }}>
+            <Modal images={images}></Modal>
+            <Container isNarrowScreen={isNarrowScreen}>
+              <Gallery images={images} />
+              <Details />
+            </Container>
+            {/* <Button block >Heyyy</Button> */}
+          </ModalContext.Provider>
+        </div>
+      </MobileContext.Provider>
+    </CartContext.Provider>
   );
 }
 
