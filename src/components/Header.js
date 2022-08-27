@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { MobileContext } from '../Context/MyContext';
 
 import Divider from './divider';
-import './Header.css';
 import Logo from './Logo';
 import Profile from './Profile';
 import Spacer from './Spacer';
-import './Header.css';
 import Cart from './Cart';
 
-const Header = ({ myCart, setCart, isNarrowScreen }) => {
+import './Header.css';
+
+
+const Header = ({ }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const { isNarrowScreen } = useContext(MobileContext);
 
     return (
         <>
@@ -73,7 +77,7 @@ const Header = ({ myCart, setCart, isNarrowScreen }) => {
                         <NavItem href='#'>Contact</NavItem>
                     </div>
                     <Spacer></Spacer>
-                    <Cart myCart={myCart} setCart={setCart} isNarrowScreen={isNarrowScreen}></Cart>
+                    <Cart></Cart>
                     <Profile img={'/images/image-avatar.png'}></Profile>
                 </nav>
                 {isNarrowScreen ? null : <Divider></Divider>}
